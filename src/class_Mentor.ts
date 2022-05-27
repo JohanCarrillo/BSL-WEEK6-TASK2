@@ -3,12 +3,12 @@ import { Conference } from './class_Conference';
 
 export class Mentor extends Attendee {
 	private _password: string;
-	private _listOfEvents: Conference[];
+	public listOfEvents: Conference[];
 
 	constructor(myName: string, myEmail: string, password: string) {
 		super(myName, myEmail);
 		this._password = password;
-		this._listOfEvents = [];
+		this.listOfEvents = [];
 	}
 
 	// -------------------------------- getters --------------------------------- 
@@ -18,14 +18,14 @@ export class Mentor extends Attendee {
 	// ----------------------------- public methods -----------------------------
 
 	public addConference = (conference: Conference): void => {
-		this._listOfEvents.push(conference)
+		this.listOfEvents.push(conference)
 	}
 
 	public showEvents(): void {
-		if (this._listOfEvents.length === 0) {
-			console.log('No events');
+		if (this.listOfEvents.length === 0) {
+			console.log('Sin eventos');
 		} else {
-			this._listOfEvents.forEach(event => {
+			this.listOfEvents.forEach(event => {
 				console.log(`${event.title}:
 				from ${event.startDate.getDate()}/${event.startDate.getMonth() + 1} to ${event.endDate.getDate()}/${event.endDate.getMonth() + 1},`)
 			});

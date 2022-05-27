@@ -34,13 +34,13 @@ export class Conference {
 	public addStudent = (newAttendee: Attendee): void => {
 		if (this._studentList.length <= 20) {
 			this._studentList.push(newAttendee);
-			console.log('attendee saved');
+			console.log('Estudiante guardado exitosamente');
 		}
-		else console.log('This conference is full');
+		else console.log('La conferencia ya esta llena');
 	}
 
 	public showStudentList () {
-		if (this._studentList.length === 0) console.log('No students registered');
+		if (this._studentList.length === 0) console.log('No hay estudiantes registrados');
 		this._studentList.forEach( student => {
 			console.log(`Nombre: ${student.name}, email: ${student.email}`);
 		});

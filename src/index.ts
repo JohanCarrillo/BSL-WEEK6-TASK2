@@ -37,7 +37,8 @@ const ejemplo = (texto:string, numero:number):void => {
           break;
         
         case 3:
-          console.log('Agregar conferencia: ',key);
+          console.log(`Opcion ${key}: agregar conferencia`);
+          register.addConference();
           break;
       
         case 4:

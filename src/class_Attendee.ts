@@ -12,8 +12,8 @@ export class Attendee {
 
 	public get name() {return this._name;}
 	public get email() {return this._email;}
-
+/* 
 	// ----------------------------- public methods ----------------------------- 
 	
-	public showInfo = (): string => `name: ${this._name}, email: ${this._email}`;
+	public showInfo = (): string => `name: ${this._name}, email: ${this._email}`; */
 }

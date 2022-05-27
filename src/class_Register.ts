@@ -38,29 +38,34 @@ export class Register extends Menu {
 
 	// ----------------------------- public methods -----------------------------
 
-	public addConference(
-		title: string,
-		mentor: Mentor, 
-		startDate: Date, 
-		endDate: Date): string {
-		// must add conference to mentor events list when conference is created
+	public async addConference(): Promise<void> {
 		
-		// here we guess the mentor is saved in list
-		if (mentor.listOfEvents.length !== 0) {
-			const lastConference = mentor.listOfEvents[mentor.listOfEvents.length - 1]
-			if (lastConference.endDate < startDate) {  // condition over dates
-				const newConference = new Conference(title, mentor, startDate, endDate);
-				this._listOfEvents.push(newConference);
-				mentor.addConference(newConference);
-				return 'Conference saved'
+		// validate mentor information
+		console.log('Solo los mentores pueden crear conferencias, valide su informacion:');
+		const mentorEmail = await super.getString('Ingrese su email de mentor');
+		const mentorPassword = await super.getString('Ingrese su password');
+		const mentor = this._listOfMentors.find(ment => ment.email === mentorEmail);
+		
+		if (!mentor) {
+			console.log('El email no corresponde a ningun mentor registrado');
+		} else if (mentor.password !== mentorPassword) {
+			console.log('La contraseña es incorrecta');
+		} else {  
+			
+			// if information is valid must check date condition
+			const conferenceTitle = await super.getString('Inserte el titulo del evento');
+			const startDate = new Date(await super.getString('Inserte la fecha de inicio YYYY/MM/DD'));
+			const endDate = new Date(await super.getString('Inserte la fecha de finalizacion YYYY/MM/DD'));
+
+			const overlapDateEvent = mentor.listOfEvents.find(event => event.startDate >= startDate);
+			if (!overlapDateEvent) {
+				console.log('El mentor tiene otro evento en esa fecha');
 			} else {
-				return `The mentor has another event in that date`;
+				const newConference = new Conference(conferenceTitle, mentor, startDate, endDate);
+				mentor.addConference(newConference);
+				this._listOfEvents.push(newConference);
+				console.log('El evento se creo de forma exitosa');
 			}
-		} else {
-			const newConference = new Conference(title, mentor, startDate, endDate);
-			this._listOfEvents.push(newConference);
-			mentor.addConference(newConference);
-			return 'Conference saved'
 		}
 	}
 
