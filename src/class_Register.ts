@@ -33,7 +33,7 @@ export class Register extends Menu {
 		console.log(
 			`${event.title}:
 				from ${event.startDate.getDate()}/${event.startDate.getMonth() + 1} to ${event.endDate.getDate()}/${event.endDate.getMonth() + 1},
-				Mentor ${event.mentor}`);
+				Mentor: ${event.mentor.name}`);
 	}
 
 	// ----------------------------- public methods -----------------------------
@@ -58,7 +58,7 @@ export class Register extends Menu {
 			const endDate = new Date(await super.getString('Inserte la fecha de finalizacion YYYY/MM/DD'));
 
 			const overlapDateEvent = mentor.listOfEvents.find(event => event.startDate >= startDate);
-			if (!overlapDateEvent) {
+			if (overlapDateEvent) {
 				console.log('El mentor tiene otro evento en esa fecha');
 			} else {
 				const newConference = new Conference(conferenceTitle, mentor, startDate, endDate);
@@ -152,6 +152,7 @@ export class Register extends Menu {
 
 	public showEventsByMentor(): void {
 		this._listOfMentors.forEach(mentor => {
+			console.log(mentor.name);
 			mentor.showEvents();
 		});
 	}

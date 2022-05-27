@@ -2,15 +2,6 @@
 import { Menu } from './class_Menu';
 import { Register } from './class_Register';
 
-const ejemplo = (texto:string, numero:number):void => {
-  console.log(`
-  
-  Haz ingresado el texto: ${texto}  y el número ${numero}
-  
-  `);
-  
-}
-
 (async () => {
   const menu = new Menu();
   const register = new Register;
@@ -38,7 +29,7 @@ const ejemplo = (texto:string, numero:number):void => {
         
         case 3:
           console.log(`Opcion ${key}: agregar conferencia`);
-          register.addConference();
+          await register.addConference();
           break;
       
         case 4:
