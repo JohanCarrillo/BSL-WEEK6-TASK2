@@ -5,37 +5,44 @@ export class Conference {
 
 	private _title: string;
 	private _mentor: Mentor;
-	startDate: Date;
-	endDate: Date;
-	private _students: Attendee[];
+	public startDate: Date;
+	public endDate: Date;
+	private _studentList: Attendee[];
 
 	constructor(
 		title: string,
 		mentor: Mentor,
-		startDate: string,
-		endDate: string,
+		startDate: Date,
+		endDate: Date,
 		students: Attendee[] = []
 	) {
 		this._title = title;
 		this._mentor = mentor;
-		this.startDate = new Date(startDate);
-		this.endDate = new Date(endDate);
-		this._students = students;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this._studentList = students;
 	}
 
 	// -------------------------------- getters --------------------------------- 
 
 	public get title() {return this._title;}
 	public get mentor() {return this._mentor;}
-	public get students() {return this._students;}
+	// public get students() {return this._students;}
 
 	// ----------------------------- public methods -----------------------------
 
-	public addAttendee = (newAttendee: Attendee): string => {
-		if (this.students.length <= 20) {
-			this.students.push(newAttendee);
-			return 'attendee saved';
+	public addStudent = (newAttendee: Attendee): void => {
+		if (this._studentList.length <= 20) {
+			this._studentList.push(newAttendee);
+			console.log('attendee saved');
 		}
-		else return 'This conference is full';
+		else console.log('This conference is full');
+	}
+
+	public showStudentList () {
+		if (this._studentList.length === 0) console.log('No students registered');
+		this._studentList.forEach( student => {
+			console.log(`Nombre: ${student.name}, email: ${student.email}`);
+		});
 	}
 }

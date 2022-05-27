@@ -38,7 +38,9 @@ export class Menu{
   #  4) Ver lista de Conferencias                   #
   #  5) Ver lista de Conferencias por profesores    #
   #  6) Registrarse en una conferencia              #
-  #  7) Esta opción es un ejemplo, ¿quieres probar? #
+  #  7) Lista de mentores                           #
+  #  8) Lista de estudiantes                        #
+  #  9) Lista de estudiantes por conferencia        #
   #  0) Salir.                                      #
   ###################################################
     `
@@ -52,10 +54,10 @@ export class Menu{
     return new Promise((resolve, reject) => {      
       process.stdin.once('data', (chunk) => {
         let name = chunk.toString().trim();
-        resolve(name)
+        resolve(name);
       // process.exit();
        });      
-    })
+    });
   }
  /**
   * @description Funcion asincrona que permite solicitar un valor numerico por consola
@@ -65,7 +67,7 @@ export class Menu{
   async getInt(question: string): Promise<number>{
     console.log(question);
     const data = await this.ask()
-    return parseInt(`${data}`)
+    return parseInt(`${data}`);
   }
 
    /**

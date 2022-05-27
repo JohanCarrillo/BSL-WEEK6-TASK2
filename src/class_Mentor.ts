@@ -3,30 +3,32 @@ import { Conference } from './class_Conference';
 
 export class Mentor extends Attendee {
 	private _password: string;
-	private _listOfEventsImIn: Conference[];
+	private _listOfEvents: Conference[];
 
 	constructor(myName: string, myEmail: string, password: string) {
 		super(myName, myEmail);
 		this._password = password;
-		this._listOfEventsImIn = [];
+		this._listOfEvents = [];
 	}
 
 	// -------------------------------- getters --------------------------------- 
 
 	public get password() {return this._password;}
-	public get eventsTitles() {
-		if (this._listOfEventsImIn.length === 0) {
-			return 'No events';
-		} else {
-			return this._listOfEventsImIn;
-		}
-	}
 
 	// ----------------------------- public methods -----------------------------
 
-	public createConference = (conference: Conference): void => {
-		this._listOfEventsImIn.push(conference)
+	public addConference = (conference: Conference): void => {
+		this._listOfEvents.push(conference)
 	}
-	
-	
+
+	public showEvents(): void {
+		if (this._listOfEvents.length === 0) {
+			console.log('No events');
+		} else {
+			this._listOfEvents.forEach(event => {
+				console.log(`${event.title}:
+				from ${event.startDate.getDate()}/${event.startDate.getMonth() + 1} to ${event.endDate.getDate()}/${event.endDate.getMonth() + 1},`)
+			});
+		}
+	}
 }
