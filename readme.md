@@ -41,7 +41,7 @@ en la aplicación.
 ## Stay in touch
 
 - Autor - [Roso Peñaranda](https://github.com/RosoPenaranda/)
-- Editado - [Johan Carrillo]
+- Editado - [Johan Carrillo](https://github.com/JohanCarrillo/)
 
 ## License
 
